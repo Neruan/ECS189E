@@ -1,5 +1,9 @@
 import api.IAdmin;
+import api.IInstructor;
+import api.IStudent;
 import api.core.impl.Admin;
+import api.core.impl.Instructor;
+import api.core.impl.Student;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,10 +15,14 @@ import static org.junit.Assert.*;
 public class TestExample {
 
     private IAdmin admin;
+    private IInstructor instructor;
+    private IStudent student;
 
     @Before
     public void setup() {
         this.admin = new Admin();
+        this.instructor = new Instructor();
+        this.student = new Student();
     }
 
     @Test
