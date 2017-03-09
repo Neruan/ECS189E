@@ -38,7 +38,7 @@ public class TestAdmin {
     @Test   //max Capcity must be greater than 0
     public void case2() {   //Bug#1
         this.admin.createClass("Test", 2017, "Teach", 0);
-        assertTrue(this.admin.classExists("Test", 2017));
+        assertFalse(this.admin.classExists("Test", 2017));
     }
 
     @Test   //Changing capcity must be equal to at least the amount of students registered
@@ -48,7 +48,7 @@ public class TestAdmin {
         this.student.registerForClass("Stu2","Teach", 2017);
         this.student.registerForClass("Stu3","Teach",2017);
         this.admin.changeCapacity("Test",2017,2);
-        assertTrue(this.admin.getClassCapacity("Test",2017) == 2);
+        assertFalse(this.admin.getClassCapacity("Test",2017) == 2);
     }
 
     @Test   //Instructor assigned to more than 2 courses a year
@@ -60,7 +60,7 @@ public class TestAdmin {
         test1 = this.admin.classExists("Test1",2017);
         test2 = this.admin.classExists("Test2", 2017);
         test3 = this.admin.classExists("Test3",2017);
-        assertTrue(test1 && test2 && test3);
+        assertFalse(test1 && test2 && test3);
     }
 
     @Test   //Instructor assigned to more than 2 courses a year
@@ -69,6 +69,6 @@ public class TestAdmin {
         System.out.print(this.admin.getClassInstructor("Test",2017 ));
         this.admin.createClass("Test", 2017, "Teach2", 15);
         System.out.print(this.admin.getClassInstructor("Test",2017 ));
-        assertTrue(this.admin.getClassInstructor("Test",2017 ) != "Teach1" || this.admin.getClassInstructor("Test",2017 ) != "Teach2");
+        assertFalse(this.admin.getClassInstructor("Test",2017 ) != "Teach1" || this.admin.getClassInstructor("Test",2017 ) != "Teach2");
     }
 }

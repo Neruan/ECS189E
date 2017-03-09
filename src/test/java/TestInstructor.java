@@ -28,14 +28,14 @@ public class TestInstructor {
     public void case0() {   //Bug#5
         this.admin.createClass("Test", 2017, "Teach", 15);
         this.instructor.addHomework("Teacher","Test", 2017, "HW1","Descrip");
-        assertTrue(this.instructor.homeworkExists("Test", 2017, "HW1"));
+        assertFalse(this.instructor.homeworkExists("Test", 2017, "HW1"));
     }
 
     @Test   //Homework is added to wrong class
     public void case1() {
         this.admin.createClass("Test", 2017, "Teach", 15);
         this.instructor.addHomework("Teach","Tester", 2017, "HW1","Descrip");
-        assertTrue(this.instructor.homeworkExists("Tester", 2017, "HW1"));
+        assertFalse(this.instructor.homeworkExists("Tester", 2017, "HW1"));
     }
 
     @Test   //Homework is graded by wrong instructor
@@ -46,7 +46,7 @@ public class TestInstructor {
         this.instructor.addHomework("Teach","Test", 2017, "HW1", "Do it");
         this.student.submitHomework("Stu1", "HW1","Ans", "Test", 2017);
         this.instructor.assignGrade("Teacher", "Test", 2017, "HW1", "Stu1",100);
-        assertTrue(this.instructor.getGrade("Test", 2017,"HW1","Stu1") == 100);
+        assertFalse(this.instructor.getGrade("Test", 2017,"HW1","Stu1") == 100);
     }
 
     @Test   //Homework is graded but not added
@@ -60,21 +60,12 @@ public class TestInstructor {
     }
 
     @Test   //Homework is added but not submitted
-    public void case4() {
+    public void case4() {   //Bug#7
         this.admin.createClass("Test", 2017, "Teach", 15);
         this.student.registerForClass("Stu1","Test",2017);
         this.student.registerForClass("Stu2","Test",2017);
         this.instructor.addHomework("Teach","Test", 2017, "HW1", "Do it");
         this.instructor.assignGrade("Teach", "Test", 2017, "HW1", "Stu1",100);
-        assertTrue(this.instructor.getGrade("Test", 2017,"HW1","Stu1") == 100);
+        assertFalse(this.instructor.getGrade("Test", 2017,"HW1","Stu1") == 100);
     }
-
-    @Test   //Homework is not added and not submitted
-    public void case5() {
-        this.admin.createClass("Test", 2017, "Teach", 15);
-        this.student.registerForClass("Stu1","Test",2017);
-        this.student.registerForClass("Stu2","Test",2017);
-        assertTrue(this.instructor.getGrade("Test", 2017,"HW1","Stu1") == 100);
-    }
-
 }
